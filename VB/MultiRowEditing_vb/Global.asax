@@ -1,0 +1,1 @@
+<%@ Application Codebehind="Global.asax.vb" Inherits="MultiRowEditing_vb.MvcApplication" Language="VB" %>
