@@ -1,9 +1,7 @@
-Imports Microsoft.VisualBasic
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Linq
 Imports System.Web
-Imports System.Web.Mvc
 Imports System.Web.Script.Serialization
 Imports System.Collections.Specialized
 
@@ -11,11 +9,9 @@ Imports System.Collections.Specialized
 Namespace MultiRowEditing.Infrastructure
     Public Class MyDictionaryModelBinder
         Implements IModelBinder
+
         Public Function BindModel(ByVal controllerContext As ControllerContext, ByVal bindingContext As ModelBindingContext) As Object Implements IModelBinder.BindModel
-            Dim model As Dictionary(Of String, Object) = TryCast(bindingContext.Model, Dictionary(Of String, Object))
-            If model Is Nothing Then
-                model = TryCast(DependencyResolver.Current.GetService(GetType(Dictionary(Of String, Object))), Dictionary(Of String, Object))
-            End If
+            Dim model As Dictionary(Of String, Object) = If(TryCast(bindingContext.Model, Dictionary(Of String, Object)), TryCast(DependencyResolver.Current.GetService(GetType(Dictionary(Of String, Object))), Dictionary(Of String, Object)))
             If bindingContext.ModelType Is GetType(Dictionary(Of String, Object)) Then
                 DoFillModel(model, controllerContext.RequestContext.HttpContext.Request.Form, controllerContext, bindingContext)
             End If
@@ -35,7 +31,7 @@ Namespace MultiRowEditing.Infrastructure
             Next key
         End Sub
         Private Function DoDeserializeString(ByVal strValue As String) As Dictionary(Of String, Object)
-            Dim serializer As JavaScriptSerializer = New JavaScriptSerializer()
+            Dim serializer As New JavaScriptSerializer()
             Return serializer.Deserialize(Of Dictionary(Of String, Object))(strValue)
         End Function
     End Class
