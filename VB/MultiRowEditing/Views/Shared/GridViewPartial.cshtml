@@ -1,0 +1,32 @@
+@model System.Data.DataTable
+
+@Html.DevExpress().GridView(settings => {
+    settings.Name = "grid";
+    settings.CallbackRouteValues = new { Controller="Home", Action="GridPartial"};
+    settings.KeyFieldName = "ProductID";
+    settings.Columns.Add("ProductID");
+    settings.Columns.Add(col => {
+        col.FieldName = "ProductName";
+        col.SetDataItemTemplateContent(diTemplate => {
+            GridViewDataItemTemplateContainer container = diTemplate as GridViewDataItemTemplateContainer;
+            Html.DevExpress().TextBox(txtSettings => {
+                txtSettings.Name = string.Format("txt_{0}", diTemplate.VisibleIndex);
+                txtSettings.Text = DataBinder.Eval(diTemplate.DataItem, diTemplate.Column.FieldName).ToString();
+                txtSettings.Properties.ClientSideEvents.TextChanged = string.Format("function(s, e) {{OnValueTextChanged(s, e, '{0}', '{1}'); }}", container.KeyValue.ToString(), container.Column.FieldName);
+            }).Render();
+        });
+    });
+    settings.Columns.Add(col => {
+        col.FieldName = "CategoryID";
+        col.SetDataItemTemplateContent(diTemplate => {
+            GridViewDataItemTemplateContainer container = diTemplate as GridViewDataItemTemplateContainer;
+            Html.DevExpress().ComboBox(cmbSettings => {
+                cmbSettings.Name = string.Format("cmb_{0}", diTemplate.VisibleIndex);
+                cmbSettings.Properties.ValueType = typeof(int);
+                cmbSettings.Properties.ValueField = "CategoryID";
+                cmbSettings.Properties.TextField = "CategoryName";
+                cmbSettings.Properties.ClientSideEvents.ValueChanged = string.Format("function(s, e) {{OnValueTextChanged(s, e, '{0}', '{1}'); }}", container.KeyValue.ToString(), container.Column.FieldName);
+            }).BindList(MultiRowEditing.Models.CategoryRepository.GetCategories()).Bind(DataBinder.Eval(diTemplate.DataItem, diTemplate.Column.FieldName)).Render();
+        });
+    });
+}).Bind(Model).GetHtml()
