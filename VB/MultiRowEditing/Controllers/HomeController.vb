@@ -6,7 +6,7 @@ Imports MultiRowEditing.Models
 Imports System.IO
 Imports System.Web.Script.Serialization
 Imports MultiRowEditing.Infrastructure
-
+Imports System.Web.Mvc
 
 Namespace MultiRowEditing.Controllers
     Public Class HomeController
@@ -18,7 +18,7 @@ Namespace MultiRowEditing.Controllers
         Public Function GridPartial() As ActionResult
             Return PartialView("GridViewPartial", ProductRepository.GetProducts())
         End Function
-        <HttpPost> _
+        <HttpPost>
         Public Function SaveData(<ModelBinder(GetType(MyDictionaryModelBinder))> ByVal changedValues As Dictionary(Of String, Object)) As JsonResult
             'bool res = ProductRepository.UpdateValues(changedValues); uncomment this line to save data
             Dim res As Boolean = True 'remove this line to test the project
