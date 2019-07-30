@@ -1,6 +1,6 @@
 # How to implement the multi-row editing feature in the GridView
 <!-- run online -->
-**[[Run Online]](https://codecentral.devexpress.com/e4236)**
+**[[Run Online]](https://codecentral.devexpress.com/e4236/)**
 <!-- run online end -->
 
 
