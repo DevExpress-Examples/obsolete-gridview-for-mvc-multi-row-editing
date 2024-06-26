@@ -1,12 +1,4 @@
-<!-- default badges list -->
-![](https://img.shields.io/endpoint?url=https://codecentral.devexpress.com/api/v1/VersionRange/128551732/12.1.7%2B)
-[![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E4236)
-[![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
-<!-- default badges end -->
 # How to implement the multi-row editing feature in the GridView
-<!-- run online -->
-**[[Run Online]](https://codecentral.devexpress.com/e4236)**
-<!-- run online end -->
 
 
 <p><strong>UPDATED:</strong><br><br>Starting with version 13.2, the GridView control offers the basic "Batch Editing Mode" functionality that allows accomplishing a similar task with less effort and does not require so much extra code. See the <a href="https://community.devexpress.com/blogs/aspnet/archive/2013/12/16/asp-net-webforms-amp-mvc-gridview-batch-edit-what-39-s-new-in-13-2.aspx">ASP.NET WebForms & MVC: GridView Batch Edit </a> blog post to learn more about this new functionality.<br>Starting with version 14.1, the GridView control offers advanced "Batch Editing Mode" programming options.<br><br>You can find a standalone DB-independent solution in our Code Examples base at:<br><a href="https://www.devexpress.com/Support/Center/p/E5046">GridView - A simple Batch Editing implementation</a> <br><br>If you have version v14.1+ available, consider using the built-in functionality instead of the approach detailed below.<br>If you need further assistance with this functionality, please create a new ticket in our Support Center.<br><br>This example demonstrates how to implement the multi-row editing feature using the GridView extension. The main idea is to save changed values in the JavaScript dictionary and pass this dictionary to the required action. It is necessary to use a custom ModelBinder in the action to convert passed data to the required dictionary object.</p>
